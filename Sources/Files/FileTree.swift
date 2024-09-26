@@ -20,7 +20,7 @@ import SwiftUI
 /// A file and folder tree structure with separated out and uuid-addressable files.
 ///
 @Observable
-public final class FileTree<Contents: FileContents> {
+public final class FileTree<Contents: FileContents>: @unchecked Sendable {
 
   /// The root of the file tree.
   ///

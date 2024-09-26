@@ -24,6 +24,7 @@ import OrderedCollections
 
 private let logger = Logger(subsystem: "org.justtesting.BundleNavigator", category: "Files")
 
+extension FileWrapper: @retroactive @unchecked Sendable {}
 
 /// A file id map associates `UUID`s with files and folders of a file tree.
 ///
@@ -34,7 +35,7 @@ public struct FileIDMap: Codable {
 
 /// Payload protocol for file contents. Concrete playload types need to be value types.
 ///
-public protocol FileContents: Equatable {
+public protocol FileContents: Equatable, Sendable {
 
   /// Create a representation of the contents of a file.
   ///
@@ -59,7 +60,7 @@ public protocol FileContents: Equatable {
 
 /// The interface required of files in folder trees.
 ///
-public protocol FileProtocol<Contents>: Identifiable, Equatable where ID == UUID {
+public protocol FileProtocol<Contents>: Identifiable, Equatable, Sendable where ID == UUID {
   associatedtype Contents: FileContents
 
   func sameContents(file: Self) -> Bool

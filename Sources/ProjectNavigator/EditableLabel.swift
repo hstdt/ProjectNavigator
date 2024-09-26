@@ -79,7 +79,7 @@ extension Binding {
   ///
   /// Inspired by https://pointfree.co as an alternative to the force unwrapping version of SwiftUI.
   ///
-  public init?(unwrap binding: Binding<Value?>) {
+  public init?(unwrap binding: Binding<Value?>) where Value: Sendable {
     guard let value = binding.wrappedValue
     else { return nil }
 
